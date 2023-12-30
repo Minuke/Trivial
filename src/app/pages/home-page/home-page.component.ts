@@ -11,8 +11,10 @@ import { ChooseNumberTeamsComponent } from 'app/components/choose-number-teams/c
 })
 export class HomePageComponent {
 
+  public teams:number = 0;
+
   getNumberTeams(teams:number){
-    console.log(teams);
+    this.teams = teams;
   }
 
 }
