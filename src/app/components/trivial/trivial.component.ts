@@ -12,6 +12,6 @@ import { Observable } from 'rxjs';
 })
 export class TrivialComponent {
 
-  @Input() questions:Trivial[] | null = [];
+  @Input() question!:Trivial;
 
 }
