@@ -1,0 +1,28 @@
+@import "styles";
+
+.choose-number-teams-container {
+  text-align: center;
+  margin-top: size(25);
+}
+
+.card-container {
+  display: flex;
+  justify-content: center;
+  margin-top: size(10);
+}
+
+.card {
+  border: size(1) solid #ccc;
+  padding: size(10);
+  margin-right: size(10);
+  transition: background-color 0.3s ease;
+}
+
+.card:hover {
+  background-color: #f0f0f0;
+  cursor: pointer;
+}
+
+.card:last-child {
+  margin-right: 0;
+}
