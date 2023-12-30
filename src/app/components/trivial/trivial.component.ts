@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
-import { Trivial } from 'app/interfaces/trivial.interface';
-import { Observable } from 'rxjs';
+import { Component, Input, inject } from '@angular/core';
+import { Answer, Trivial } from 'app/interfaces/trivial.interface';
+import { GameService } from 'app/services/game.service';
 
 @Component({
   selector: 'app-trivial',
@@ -12,10 +12,13 @@ import { Observable } from 'rxjs';
 })
 export class TrivialComponent {
 
+  private gameService:GameService = inject(GameService);
+
   @Input() question!:Trivial;
 
-  selectAnswer(answer:string):void {
-    console.log(answer);
+  selectAnswer(answer:Answer):void {
+    answer.selected = true;
+    this.gameService.setQuestion(this.question);
   }
 
 }

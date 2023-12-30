@@ -12,6 +12,7 @@ export class GameService {
   private http:HttpClient = inject(HttpClient);
 
   private teamData:Team[] = [];
+  public question:Trivial = {question:"", showed:false, totalCorrectAnswers:0, answers:[]};
   private questionsUrl: string = "http://localhost:3000/questions";
 
 
@@ -33,6 +34,20 @@ export class GameService {
 
   getQuestions():Observable<Trivial[]> {
     return this.http.get<Trivial[]>(`${ this.questionsUrl }`);
+  }
+
+  setQuestion(question:Trivial):void {
+    if (typeof localStorage !== 'undefined') {
+      question.showed = true;
+      localStorage.setItem('question', JSON.stringify(question));
+    }
+  }
+
+  getQuestion():Trivial {
+      if (typeof localStorage !== 'undefined') {
+        this.question = JSON.parse(localStorage.getItem('question') || '[]');
+      }
+    return this.question;
   }
 
 }

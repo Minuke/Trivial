@@ -22,16 +22,19 @@ export class GamePageComponent {
 
   public teams:Team[] = this.gameService.getTeamData();
   public questions:Observable<Trivial[]> = this.gameService.getQuestions();
-  public question:Trivial = {question:"", showed:false, totalCorrectAnswers:0, answers:[]};
+  public question:Trivial = this.gameService.getQuestion();
 
 
   ngOnInit():void {
-    this.chooseQuestion();
+    if (Object.keys(this.question).length === 0) {
+      this.chooseQuestion();
+    }
   }
 
   chooseQuestion():void {
     this.questionSubscription = this.questions.subscribe((questions) => {
       this.question = questions[0];
+      this.gameService.setQuestion(this.question);
     });
   }
 

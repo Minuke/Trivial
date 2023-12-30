@@ -7,9 +7,9 @@
 
   <div class="row mt-4">
       @for (answer of question.answers; track answer;) {
-        <div (click)="selectAnswer(answer.answer)" class="card col-6">
+        <div (click)="selectAnswer(answer)" class="card col-6" [ngClass]="{'correct': answer.selected && answer.correct, 'incorrect': answer.selected && !answer.correct}">
           <div class="card-body">
-            <p class="answer">{{ answer.answer }}</p>
+            <p class="answer">{{ answer.answer }} - {{answer.selected}}</p>
           </div>
         </div>
       }
