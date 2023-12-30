@@ -26,6 +26,15 @@
       <p class="error-text">El nombre del equipo 3 es obligatorio</p>
     </div>
   </div>
+  <div class="field">
+    <div class="form-group">
+      <label for="name4">Nombre del equipo 4: </label>
+      <input id="name4" type="text" class="form-control" formControlName="name4" autocomplete="off">
+    </div>
+    <div *ngIf="teamForm.get('name4')?.errors?.['required'] && teamForm.get('name4')?.touched">
+      <p class="error-text">El nombre del equipo 4 es obligatorio</p>
+    </div>
+  </div>
   <div class="submit-button">
     <button type="submit" [disabled]="!teamForm.valid">Empezar</button>
   </div>
