@@ -22,6 +22,7 @@ export class TrivialComponent {
   public currentTeam!: Team;
 
   selectAnswer(answer:Answer):void {
+    if(answer.selected) return;
     this.nextTeamTurn();
     this.saveAnswerStatus(answer);
     this.addPoints(answer)
