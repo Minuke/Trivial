@@ -1,3 +1,5 @@
-@for (team of teams; track team;) {
-  <app-score-board [teamName]="team.name" [teamScore]="team.score"></app-score-board>
-}
+<div class="scoreboard">
+  @for (team of teams; track team;) {
+    <app-score-board [teamName]="team.name" [teamScore]="team.score"></app-score-board>
+  }
+</div>

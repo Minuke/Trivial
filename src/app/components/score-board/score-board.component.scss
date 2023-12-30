@@ -1,0 +1,12 @@
+@import "styles";
+
+.team-info {
+  background-color: #333;
+  color: #fff;
+  padding: size(10);
+  margin: size(10);
+  border-radius: size(5);
+  text-align: center;
+  font-size: size(20);
+  box-shadow: 0 0 size(15) rgba(0,0,0,0.1);
+}
