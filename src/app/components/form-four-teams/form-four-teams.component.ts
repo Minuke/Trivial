@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Team } from 'app/interfaces/team.interface';
 
 @Component({
   selector: 'app-form-four-teams',
@@ -41,13 +42,27 @@ export class FormFourTeamsComponent {
     return this.teamForm.get('name4');
   }
 
-  onSubmit() {
+  onSubmit():void {
     if (this.teamForm.invalid) {
       this.teamForm.markAllAsTouched();
       return;
     }else{
-      console.log(this.teamForm.value);
+      this.buildTeams(this.teamForm.value);
     }
+  }
+
+  private buildTeams(formValues:any):void{
+    const teams: Team[] = [];
+      for (let i = 1; i <= 4; i++) {
+        const name = formValues[`name${i}`];
+        const score = formValues[`score${i}`];
+        const team: Team = {
+          name: name,
+          score: score,
+        };
+
+        teams.push(team);
+      }
   }
 
 }
