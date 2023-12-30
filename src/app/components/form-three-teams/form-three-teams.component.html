@@ -1,0 +1,32 @@
+<form [formGroup]="teamForm" (ngSubmit)="onSubmit()" class="center-form">
+  <div class="field">
+    <div class="form-group">
+      <label for="name1">Nombre del equipo 1: </label>
+      <input id="name1" type="text" class="form-control" formControlName="name1" autocomplete="off">
+    </div>
+    <div *ngIf="teamForm.get('name1')?.errors?.['required'] && teamForm.get('name1')?.touched">
+      <p class="error-text">El nombre del equipo 1 es obligatorio</p>
+    </div>
+  </div>
+  <div class="field">
+    <div class="form-group">
+      <label for="name2">Nombre del equipo 2: </label>
+      <input id="name2" type="text" class="form-control" formControlName="name2" autocomplete="off">
+    </div>
+    <div *ngIf="teamForm.get('name2')?.errors?.['required'] && teamForm.get('name2')?.touched">
+      <p class="error-text">El nombre del equipo 2 es obligatorio</p>
+    </div>
+  </div>
+  <div class="field">
+    <div class="form-group">
+      <label for="name3">Nombre del equipo 3: </label>
+      <input id="name3" type="text" class="form-control" formControlName="name3" autocomplete="off">
+    </div>
+    <div *ngIf="teamForm.get('name2')?.errors?.['required'] && teamForm.get('name2')?.touched">
+      <p class="error-text">El nombre del equipo 3 es obligatorio</p>
+    </div>
+  </div>
+  <div class="submit-button">
+    <button type="submit" [disabled]="!teamForm.valid">Empezar</button>
+  </div>
+</form>

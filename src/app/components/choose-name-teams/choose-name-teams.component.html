@@ -1,6 +1,12 @@
 <div class="container choose-name-teams-container">
   @if(teams > 0) {
     <p>Has seleccionado <b>{{teams}} equipos</b>. Introduzca los nombres para cada equipo:</p>
-    <app-form-two-teams></app-form-two-teams>
+    @if(teams == 2){
+      <app-form-two-teams></app-form-two-teams>
+    }@else if(teams == 3){
+      <app-form-three-teams></app-form-three-teams>
+    }@else{
+
+    }
   }
 </div>
