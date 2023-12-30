@@ -1,12 +1,19 @@
-import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Injectable, inject } from '@angular/core';
 import { Team } from 'app/interfaces/team.interface';
+import { Trivial } from 'app/interfaces/trivial.interface';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GameService {
 
+  private http:HttpClient = inject(HttpClient);
+
   private teamData:Team[] = [];
+  private questionsUrl: string = "http://localhost:3000/questions";
+
 
   setTeamData(newDataTeam: Team[]): void {
     this.teamData = newDataTeam;
@@ -23,4 +30,9 @@ export class GameService {
     }
     return this.teamData;
   }
+
+  getQuestions():Observable<Trivial[]> {
+    return this.http.get<Trivial[]>(`${ this.questionsUrl }`);
+  }
+
 }
