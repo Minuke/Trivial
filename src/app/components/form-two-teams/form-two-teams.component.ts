@@ -29,6 +29,11 @@ export class FormTwoTeamsComponent {
   }
 
   onSubmit() {
-    console.log(this.teamForm.value);
+    if (this.teamForm.invalid) {
+      this.teamForm.markAllAsTouched();
+      return;
+    }else{
+      console.log(this.teamForm.value);
+    }
   }
 }
