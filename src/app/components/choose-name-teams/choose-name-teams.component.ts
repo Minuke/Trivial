@@ -17,6 +17,7 @@ export class ChooseNameTeamsComponent {
 
   teamForm = this.fb.group({
     name: ['', Validators.required],
+    score: [0]
   });
 
   get name() {
