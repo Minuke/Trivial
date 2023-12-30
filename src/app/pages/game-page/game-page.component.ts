@@ -17,7 +17,7 @@ export class GamePageComponent {
   public teams: Team[] = [];
 
   ngOnInit() {
-    this.teams = this.gameService.getDatos();
+    this.teams = this.gameService.getTeamData();
   }
 
 }

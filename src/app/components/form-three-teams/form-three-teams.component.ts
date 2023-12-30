@@ -48,7 +48,7 @@ export class FormThreeTeamsComponent {
       return;
     }else{
       this.teamsBuild = this.buildTeams(this.teamForm.value);
-      this.gameService.setDatos(this.teamsBuild);
+      this.gameService.setTeamData(this.teamsBuild);
       this.router.navigate(['/game']);
     }
   }
