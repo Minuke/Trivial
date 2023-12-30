@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, inject } from '@angular/core';
+import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Team } from 'app/interfaces/team.interface';
+import { GameService } from 'app/services/game.service';
 
 @Component({
   selector: 'app-form-four-teams',
@@ -12,7 +14,11 @@ import { Team } from 'app/interfaces/team.interface';
 })
 export class FormFourTeamsComponent {
 
-  constructor(private fb: FormBuilder) { }
+  private fb:FormBuilder = inject(FormBuilder);
+  private gameService:GameService = inject(GameService);
+  private router:Router = inject(Router);
+
+  public teamsBuild:Team[] = [];
 
   teamForm = this.fb.group({
     name1: ['', Validators.required],
@@ -47,11 +53,13 @@ export class FormFourTeamsComponent {
       this.teamForm.markAllAsTouched();
       return;
     }else{
-      this.buildTeams(this.teamForm.value);
+      this.teamsBuild = this.buildTeams(this.teamForm.value);
+      this.gameService.setDatos(this.teamsBuild);
+      this.router.navigate(['/game']);
     }
   }
 
-  private buildTeams(formValues:any):void{
+  private buildTeams(formValues:any):Team[] {
     const teams: Team[] = [];
       for (let i = 1; i <= 4; i++) {
         const name = formValues[`name${i}`];
@@ -63,6 +71,7 @@ export class FormFourTeamsComponent {
 
         teams.push(team);
       }
+      return teams;
   }
 
 }
