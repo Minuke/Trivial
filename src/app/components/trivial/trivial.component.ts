@@ -14,4 +14,8 @@ export class TrivialComponent {
 
   @Input() question!:Trivial;
 
+  selectAnswer(answer:string):void {
+    console.log(answer);
+  }
+
 }

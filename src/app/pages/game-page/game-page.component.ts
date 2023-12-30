@@ -22,7 +22,7 @@ export class GamePageComponent {
 
   public teams:Team[] = this.gameService.getTeamData();
   public questions:Observable<Trivial[]> = this.gameService.getQuestions();
-  public question!:Trivial;
+  public question:Trivial = {question:"", showed:false, totalCorrectAnswers:0, answers:[]};
 
 
   ngOnInit():void {
