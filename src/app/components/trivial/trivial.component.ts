@@ -3,6 +3,7 @@ import { Component, Input, inject } from '@angular/core';
 import { Team } from 'app/interfaces/team.interface';
 import { Answer, Trivial } from 'app/interfaces/trivial.interface';
 import { GameService } from 'app/services/game.service';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-trivial',
@@ -15,13 +16,28 @@ export class TrivialComponent {
 
   private gameService:GameService = inject(GameService);
 
-  @Input() question!:Trivial;
   @Input() teams!:Team[];
 
   public currentTurn:number = this.gameService.getCurrentTurn();
-  public currentTeam!: Team;
   public totalCorrectAnswersSelected:number = this.gameService.getTotalCorrectAnswersSelected();
-  public nextQuestion:boolean = this.gameService.getNextQuestion();
+  public endQuestion:boolean = this.gameService.getEndQuestion();
+  public questions:Observable<Trivial[]> = this.gameService.getQuestions();
+  public question:Trivial = this.gameService.getQuestion();
+  public currentTeam!: Team;
+  private questionSubscription?: Subscription;
+
+  ngOnInit():void {
+    if (Object.keys(this.question).length === 0) {
+      this.chooseQuestion();
+    }
+  }
+
+  chooseQuestion():void {
+    this.questionSubscription = this.questions.subscribe((questions) => {
+      this.question = questions[0];
+      this.gameService.setQuestion(this.question);
+    });
+  }
 
   selectAnswer(answer:Answer):void {
     if(answer.selected) return;
@@ -29,8 +45,8 @@ export class TrivialComponent {
     this.saveAnswerStatus(answer);
     if(answer.correct) {
       this.addPoints(answer);
-      this.nextQuestion = this.endQuestion();
-      this.gameService.setNextQuestion(this.nextQuestion);
+      this.endQuestion = this.isEndQuestion();
+      this.gameService.setEndQuestion(this.endQuestion);
     }
   }
 
@@ -56,13 +72,19 @@ export class TrivialComponent {
     }
   }
 
-  endQuestion():boolean {
+  isEndQuestion():boolean {
     this.totalCorrectAnswersSelected += 1;
     this.gameService.setTotalCorrectAnswersSelected(this.totalCorrectAnswersSelected);
     if(this.question.totalCorrectAnswers == this.question.totalCorrectAnswers) {
       return true;
     } else {
       return false;
+    }
+  }
+
+  ngOnDestroy():void {
+    if (this.questionSubscription) {
+      this.questionSubscription.unsubscribe();
     }
   }
 

@@ -3,9 +3,7 @@ import { Component, inject } from '@angular/core';
 import { ScoreBoardComponent } from 'app/components/score-board/score-board.component';
 import { TrivialComponent } from 'app/components/trivial/trivial.component';
 import { Team } from 'app/interfaces/team.interface';
-import { Trivial } from 'app/interfaces/trivial.interface';
 import { GameService } from 'app/services/game.service';
-import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-game-page',
@@ -18,30 +16,12 @@ export class GamePageComponent {
 
   private gameService:GameService = inject(GameService);
 
-  private questionSubscription?: Subscription;
-
   public teams:Team[] = this.gameService.getTeamData();
-  public questions:Observable<Trivial[]> = this.gameService.getQuestions();
-  public question:Trivial = this.gameService.getQuestion();
 
 
-  ngOnInit():void {
-    if (Object.keys(this.question).length === 0) {
-      this.chooseQuestion();
-    }
-  }
 
-  chooseQuestion():void {
-    this.questionSubscription = this.questions.subscribe((questions) => {
-      this.question = questions[0];
-      this.gameService.setQuestion(this.question);
-    });
-  }
 
-  ngOnDestroy():void {
-    if (this.questionSubscription) {
-      this.questionSubscription.unsubscribe();
-    }
-  }
+
+
 
 }
