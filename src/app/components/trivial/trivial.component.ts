@@ -108,6 +108,11 @@ export class TrivialComponent {
     this.router.navigate(['/results']);
   }
 
+  startAgain(){
+    this.gameService.deleteData();
+    this.router.navigate(['/home']);
+  }
+
   ngOnDestroy():void {
     if (this.questionSubscription) {
       this.questionSubscription.unsubscribe();
