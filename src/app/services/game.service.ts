@@ -86,9 +86,27 @@ export class GameService {
     }
   }
 
+  deleteTotalCorrectAnswersSelected():void {
+    if (typeof localStorage !== 'undefined') {
+      localStorage.removeItem('totalCorrectAnswersSelected');
+    }
+  }
+
   setEndQuestion(endQuestion:boolean) {
     if (typeof localStorage !== 'undefined') {
       localStorage.setItem('endQuestion', JSON.stringify(endQuestion));
+    }
+  }
+
+  deleteEndQuestion():void {
+    if (typeof localStorage !== 'undefined') {
+      localStorage.removeItem('endQuestion');
+    }
+  }
+
+  deleteQuestion():void {
+    if (typeof localStorage !== 'undefined') {
+      localStorage.removeItem('question');
     }
   }
 

@@ -88,4 +88,13 @@ export class TrivialComponent {
     }
   }
 
+  prepareNextQuestion() {
+    this.gameService.setTotalCorrectAnswersSelected(0);
+    this.totalCorrectAnswersSelected = this.gameService.getTotalCorrectAnswersSelected();
+    this.gameService.setEndQuestion(false);
+    this.endQuestion = this.gameService.getEndQuestion();
+    this.gameService.deleteQuestion();
+    this.chooseQuestion();
+  }
+
 }
