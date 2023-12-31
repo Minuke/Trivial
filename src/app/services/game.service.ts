@@ -15,6 +15,7 @@ export class GameService {
   public currentTurn:number = 0;
   public totalCorrectAnswersSelected:number = 0;
   public endQuestion:boolean = false;
+  public rounds:number = 1;
   public question:Trivial = {question:"", showed:false, totalCorrectAnswers:0, answers:[]};
   private questionsUrl: string = "http://localhost:3000/questions";
 
@@ -107,6 +108,19 @@ export class GameService {
   deleteQuestion():void {
     if (typeof localStorage !== 'undefined') {
       localStorage.removeItem('question');
+    }
+  }
+
+  getRounds():number {
+    if (typeof localStorage !== 'undefined') {
+      this.rounds = JSON.parse(localStorage.getItem('rounds') || "1");
+    }
+  return this.rounds;
+  }
+
+  setRounds(rounds:number) {
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem('rounds', JSON.stringify(rounds));
     }
   }
 

@@ -16,6 +16,13 @@
   </div>
 </div>
 
-<div class="end-question-button">
-  <button type="submit" [disabled]="!endQuestion" (click)="prepareNextQuestion()">Siguiente Pregunta</button>
-</div>
+@if(endTrivial){
+  <div class="end-question-button">
+    <button type="submit" [disabled]="!endQuestion" (click)="goToResults()">Fin del Juego</button>
+  </div>
+}@else {
+  <div class="end-question-button">
+    <button type="submit" [disabled]="!endQuestion" (click)="prepareNextQuestion()">Siguiente Pregunta</button>
+  </div>
+}
+
