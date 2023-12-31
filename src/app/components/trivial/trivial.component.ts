@@ -29,9 +29,9 @@ export class TrivialComponent {
   public currentTeam!: Team;
   private questionSubscription?: Subscription;
   public endTrivial:boolean = false;
-  public totalRounds:number = 2;
-  //test: delete
-  public questionIndex = 0;
+  public totalRounds:number = 9;
+  public questionHistory:string[] = this.gameService.getQuestionHistory();
+  public attempsChooseQuestion:number = 0;
 
   ngOnInit():void {
     if (Object.keys(this.question).length === 0) {
@@ -41,9 +41,18 @@ export class TrivialComponent {
 
   chooseQuestion():void {
     this.questionSubscription = this.questions.subscribe((questions) => {
-      this.question = questions[this.questionIndex];
-      this.gameService.setQuestion(this.question);
-      this.questionIndex++;
+      var randomIndex = Math.floor(Math.random() * questions.length);
+      let isRepeteadQuestion = this.gameService.setQuestionHistory(questions[randomIndex]);
+      if(!isRepeteadQuestion){
+        this.question = questions[randomIndex];
+        this.gameService.setQuestion(this.question);
+      } else {
+        this.chooseQuestion();
+        this.attempsChooseQuestion++;
+        if(this.attempsChooseQuestion == 3){
+          this.router.navigate(['/results']);
+        }
+      }
     });
   }
 

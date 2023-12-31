@@ -17,6 +17,7 @@ export class GameService {
   public endQuestion:boolean = false;
   public rounds:number = 1;
   public question:Trivial = {question:"", showed:false, totalCorrectAnswers:0, answers:[]};
+  public questionHistory:string[] = [];
   private questionsUrl: string = "http://localhost:3000/questions";
 
 
@@ -132,7 +133,28 @@ export class GameService {
       localStorage.removeItem('endQuestion');
       localStorage.removeItem('question');
       localStorage.removeItem('totalCorrectAnswersSelected');
+      localStorage.removeItem('history');
     }
   }
+
+  getQuestionHistory():string[] {
+    if (typeof localStorage !== 'undefined') {
+      this.questionHistory = JSON.parse(localStorage.getItem('history') || "[]");
+    }
+  return this.questionHistory;
+  }
+
+  setQuestionHistory(question:Trivial):boolean {
+    if(!this.questionHistory.includes(question.question)) {
+      this.questionHistory.push(question.question);
+      if (typeof localStorage !== 'undefined') {
+        localStorage.setItem('history', JSON.stringify(this.questionHistory));
+        return true;
+      }
+    } else {
+      return false;
+    }
+    return false;
+}
 
 }
