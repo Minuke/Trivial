@@ -42,8 +42,8 @@ export class TrivialComponent {
   chooseQuestion():void {
     this.questionSubscription = this.questions.subscribe((questions) => {
       var randomIndex = Math.floor(Math.random() * questions.length);
-      let isRepeteadQuestion = this.gameService.setQuestionHistory(questions[randomIndex]);
-      if(!isRepeteadQuestion){
+      let isNewQuestion = this.gameService.setQuestionHistory(questions[randomIndex]);
+      if(isNewQuestion){
         this.question = questions[randomIndex];
         this.gameService.setQuestion(this.question);
       } else {
