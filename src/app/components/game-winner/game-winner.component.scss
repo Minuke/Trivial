@@ -1,0 +1,14 @@
+@import "styles";
+
+.winner {
+  text-align: center;
+  padding: size(20);
+  background-color: #4CAF50;
+  color: white;
+  border-radius: size(20);
+  box-shadow: 0 size(8) size(15) rgba(0, 0, 0, 0.1);
+  width: size(200);
+  max-width: size(200);
+  min-width: size(200);
+  margin: auto;
+}

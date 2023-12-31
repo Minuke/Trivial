@@ -3,4 +3,6 @@
     <app-score-board [teamName]="team.name" [teamScore]="team.score"></app-score-board>
 }
 </div>
-<app-game-winner></app-game-winner>
+<div class="winner-container">
+  <app-game-winner [teams]="teams"></app-game-winner>
+</div>

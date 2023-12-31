@@ -46,6 +46,6 @@ button:hover {
 button[disabled] {
   background-color: #ccc;
   color: #666;
-  border: 1px solid #ccc;
+  border: size(1) solid #ccc;
   cursor: not-allowed;
 }

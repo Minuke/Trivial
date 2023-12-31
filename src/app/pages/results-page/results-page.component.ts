@@ -19,7 +19,6 @@ export class ResultsPageComponent {
 
   ngOnInit():void {
     this.teams = this.gameService.getTeamData();
-    console.log(this.teams)
   }
 
 }

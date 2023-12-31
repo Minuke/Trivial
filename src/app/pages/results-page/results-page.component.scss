@@ -5,3 +5,12 @@
   justify-content: center;
   margin-top: size(25);
 }
+
+.winner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  padding: size(25) 0;
+}
