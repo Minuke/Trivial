@@ -18,9 +18,9 @@ export class TrivialComponent {
   @Input() question!:Trivial;
   @Input() teams!:Team[];
 
-  public currentTurn = 0;
+  public currentTurn:number = this.gameService.getCurrentTurn();
   public currentTeam!: Team;
-  public totalCorrectAnswersSelected:number = 0;
+  public totalCorrectAnswersSelected:number = this.gameService.getTotalCorrectAnswersSelected();
   public nextQuestion:boolean = false;
 
   selectAnswer(answer:Answer):void {
@@ -43,7 +43,9 @@ export class TrivialComponent {
       this.currentTurn = 0;
     }
     this.currentTeam = this.teams[this.currentTurn];
-    this.currentTurn++;
+    this.currentTurn += 1;
+    this.gameService.setCurrentTurn(this.currentTurn);
+
   }
 
   addPoints(answer:Answer):void {
@@ -55,6 +57,7 @@ export class TrivialComponent {
 
   endQuestion():boolean {
     this.totalCorrectAnswersSelected += 1;
+    this.gameService.setTotalCorrectAnswersSelected(this.totalCorrectAnswersSelected);
     if(this.question.totalCorrectAnswers == this.question.totalCorrectAnswers) {
       return true;
     } else {
