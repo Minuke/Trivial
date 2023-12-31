@@ -37,8 +37,6 @@ export class TrivialComponent {
     if (Object.keys(this.question).length === 0) {
       this.chooseQuestion();
     }
-
-    console.log(this.rounds)
   }
 
   chooseQuestion():void {

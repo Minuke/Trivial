@@ -1,4 +1,5 @@
 import { Component, inject } from "@angular/core";
+import { Router } from "@angular/router";
 import { GameWinnerComponent } from "app/components/game-winner/game-winner.component";
 import { ScoreBoardComponent } from "app/components/score-board/score-board.component";
 import { Team } from "app/interfaces/team.interface";
@@ -16,9 +17,15 @@ export class ResultsPageComponent {
 
   public teams: Team[] = [];
   private gameService:GameService = inject(GameService);
+  private router:Router = inject(Router);
 
   ngOnInit():void {
     this.teams = this.gameService.getTeamData();
+  }
+
+  startAgain(){
+    this.gameService.deleteData();
+    this.router.navigate(['/home']);
   }
 
 }

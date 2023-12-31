@@ -14,3 +14,25 @@
   font-family: Arial, sans-serif;
   padding: size(25) 0;
 }
+
+.end-question-button {
+  display: flex;
+  justify-content: center;
+}
+
+button {
+  background-color: #007bff;
+  color: #fff;
+  border: size(1) solid #007bff;
+  padding: size(10) size(15);
+  border: size(1) solid #ccc;
+  border-radius: size(5);
+  margin-top: size(10);
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+  cursor: pointer;
+}
+

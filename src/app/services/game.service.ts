@@ -124,4 +124,15 @@ export class GameService {
     }
   }
 
+  deleteData() {
+    if (typeof localStorage !== 'undefined') {
+      localStorage.removeItem('teamData');
+      localStorage.removeItem('rounds');
+      localStorage.removeItem('currentTurn');
+      localStorage.removeItem('endQuestion');
+      localStorage.removeItem('question');
+      localStorage.removeItem('totalCorrectAnswersSelected');
+    }
+  }
+
 }
