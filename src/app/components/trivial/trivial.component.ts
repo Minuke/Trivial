@@ -20,12 +20,17 @@ export class TrivialComponent {
 
   public currentTurn = 0;
   public currentTeam!: Team;
+  public totalCorrectAnswersSelected:number = 0;
+  public nextQuestion:boolean = false;
 
   selectAnswer(answer:Answer):void {
     if(answer.selected) return;
     this.nextTeamTurn();
     this.saveAnswerStatus(answer);
-    this.addPoints(answer)
+    if(answer.correct) {
+      this.addPoints(answer);
+      this.nextQuestion = this.endQuestion();
+    }
   }
 
   saveAnswerStatus(answer:Answer) {
@@ -45,6 +50,15 @@ export class TrivialComponent {
     if(answer.correct) {
       this.currentTeam.score += 1;
       this.gameService.setTeamData(this.teams);
+    }
+  }
+
+  endQuestion():boolean {
+    this.totalCorrectAnswersSelected += 1;
+    if(this.question.totalCorrectAnswers == this.question.totalCorrectAnswers) {
+      return true;
+    } else {
+      return false;
     }
   }
 
