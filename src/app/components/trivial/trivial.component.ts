@@ -21,7 +21,7 @@ export class TrivialComponent {
   public currentTurn:number = this.gameService.getCurrentTurn();
   public currentTeam!: Team;
   public totalCorrectAnswersSelected:number = this.gameService.getTotalCorrectAnswersSelected();
-  public nextQuestion:boolean = false;
+  public nextQuestion:boolean = this.gameService.getNextQuestion();
 
   selectAnswer(answer:Answer):void {
     if(answer.selected) return;
@@ -30,6 +30,7 @@ export class TrivialComponent {
     if(answer.correct) {
       this.addPoints(answer);
       this.nextQuestion = this.endQuestion();
+      this.gameService.setNextQuestion(this.nextQuestion);
     }
   }
 

@@ -5,7 +5,7 @@
     </div>
   </div>
 
-  <div class="row mt-4">
+  <div class="row mt-4" [ngClass]="{'disabled-card': nextQuestion == true}">
       @for (answer of question.answers; track answer;) {
         <div (click)="selectAnswer(answer)" class="card col-6" [ngClass]="{'correct': answer.selected && answer.correct, 'incorrect': answer.selected && !answer.correct}">
           <div class="card-body">
@@ -14,4 +14,8 @@
         </div>
       }
   </div>
+</div>
+
+<div class="next-question-button">
+  <button type="submit" [disabled]="!nextQuestion">Siguiente Pregunta</button>
 </div>

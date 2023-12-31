@@ -14,6 +14,7 @@ export class GameService {
   private teamData:Team[] = [];
   public currentTurn:number = 0;
   public totalCorrectAnswersSelected:number = 0;
+  public nextQuestion:boolean = false;
   public question:Trivial = {question:"", showed:false, totalCorrectAnswers:0, answers:[]};
   private questionsUrl: string = "http://localhost:3000/questions";
 
@@ -72,9 +73,22 @@ export class GameService {
   return this.totalCorrectAnswersSelected;
   }
 
+  getNextQuestion() {
+    if (typeof localStorage !== 'undefined') {
+      this.nextQuestion = JSON.parse(localStorage.getItem('nextQuestion') || "false");
+    }
+  return this.nextQuestion;
+  }
+
   setTotalCorrectAnswersSelected(totalCorrectAnswersSelected:number) {
     if (typeof localStorage !== 'undefined') {
       localStorage.setItem('totalCorrectAnswersSelected', JSON.stringify(totalCorrectAnswersSelected));
+    }
+  }
+
+  setNextQuestion(nextQuestion:boolean) {
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem('nextQuestion', JSON.stringify(nextQuestion));
     }
   }
 
