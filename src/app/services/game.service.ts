@@ -1,8 +1,9 @@
+import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
+import { Inject, Injectable, PLATFORM_ID, inject } from '@angular/core';
 import { Team } from 'app/interfaces/team.interface';
 import { Trivial } from 'app/interfaces/trivial.interface';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,22 @@ export class GameService {
   public question:Trivial = {question:"", showed:false, totalCorrectAnswers:0, answers:[]};
   public questionHistory:string[] = [];
   private questionsUrl: string = "http://localhost:3000/questions";
+  private componentSource: BehaviorSubject<string>;
+  public currentComponent: Observable<string>;
 
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+    const initialComponent = isPlatformBrowser(this.platformId) ? localStorage.getItem('component') || 'component1' : 'component1';
+    this.componentSource = new BehaviorSubject(initialComponent);
+    this.currentComponent = this.componentSource.asObservable();
+  }
+
+
+  switchComponent(component: string) {
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.setItem('component', component);
+    }
+    this.componentSource.next(component);
+  }
 
   setTeamData(newDataTeam: Team[]): void {
     this.teamData = newDataTeam;
@@ -155,6 +171,6 @@ export class GameService {
       return false;
     }
     return false;
-}
+  }
 
 }

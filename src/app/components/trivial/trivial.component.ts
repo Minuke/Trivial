@@ -119,7 +119,7 @@ export class TrivialComponent {
 
   startAgain(){
     this.gameService.deleteData();
-    this.router.navigate(['/home']);
+    this.gameService.switchComponent('component1');
   }
 
   ngOnDestroy():void {

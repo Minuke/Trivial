@@ -42,7 +42,7 @@ export class FormTwoTeamsComponent {
     }else{
       this.teamsBuild = this.buildTeams(this.teamForm.value);
       this.gameService.setTeamData(this.teamsBuild);
-      this.router.navigate(['/game']);
+      this.gameService.switchComponent('component2');
     }
   }
 
