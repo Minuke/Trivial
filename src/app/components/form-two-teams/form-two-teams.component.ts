@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { Team } from 'app/interfaces/team.interface';
 import { GameService } from 'app/services/game.service';
 
@@ -16,7 +15,6 @@ export class FormTwoTeamsComponent {
 
   private fb:FormBuilder = inject(FormBuilder);
   private gameService:GameService = inject(GameService);
-  private router:Router = inject(Router);
 
   public teamsBuild:Team[] = [];
 

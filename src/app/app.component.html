@@ -1,6 +1,8 @@
 @defer {
   <app-home-page *ngIf="currentComponent === 'component1'"></app-home-page>
-}
-@defer {
   <app-game-page *ngIf="currentComponent === 'component2'"></app-game-page>
+  <app-results-page *ngIf="currentComponent === 'component3'"></app-results-page>
+}@placeholder (minimum 500ms) {
+  Cargando...
 }
+

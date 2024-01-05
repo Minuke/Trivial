@@ -29,7 +29,7 @@ export class TrivialComponent {
   public currentTeam!: Team;
   private questionSubscription?: Subscription;
   public endTrivial:boolean = false;
-  public totalRounds:number = 9;
+  public totalRounds:number = 2;
   public questionHistory:string[] = this.gameService.getQuestionHistory();
   public attempsChooseQuestion:number = 0;
 
@@ -50,7 +50,7 @@ export class TrivialComponent {
         this.chooseQuestion();
         this.attempsChooseQuestion++;
         if(this.attempsChooseQuestion == 3){
-          this.router.navigate(['/results']);
+          this.gameService.switchComponent('component3');
         }
       }
     });
@@ -114,7 +114,7 @@ export class TrivialComponent {
   }
 
   goToResults():void {
-    this.router.navigate(['/results']);
+    this.gameService.switchComponent('component3');
   }
 
   startAgain(){

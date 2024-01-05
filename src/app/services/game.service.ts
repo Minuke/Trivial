@@ -29,7 +29,6 @@ export class GameService {
     this.currentComponent = this.componentSource.asObservable();
   }
 
-
   switchComponent(component: string) {
     if (isPlatformBrowser(this.platformId)) {
       localStorage.setItem('component', component);

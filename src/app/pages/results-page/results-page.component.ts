@@ -25,7 +25,7 @@ export class ResultsPageComponent {
 
   startAgain(){
     this.gameService.deleteData();
-    this.router.navigate(['/home']);
+    this.gameService.switchComponent('component1');
   }
 
 }
